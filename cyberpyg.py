@@ -12,6 +12,7 @@ bot = discord.Client()
 @bot.event
 async def on_ready():
     print("Cyber PYG ready !")
+    print("Je suis content :)")
 
 
 bot.run(TOKEN)
