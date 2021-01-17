@@ -1,13 +1,19 @@
-import discord
+from discord.ext import commands
 
-TOKEN = "NzkxNDAwNjM0NjIzNDU5MzY4.X-OnRg.SBwciY3auUrDV4NhjKAYSoxoLAQ"  # Main Bot
-
-bot = discord.Client()
+from src.utils import *
 
 
-@bot.event
-async def on_ready():
-    print("Cyber PYG ready !")
+class CyberPYG(commands.Bot):
+    def __init__(self, prefix: str):
+        super().__init__(command_prefix=prefix)
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print(f"Connecté en tant que {self.user}")
 
 
-bot.run(TOKEN)
+if __name__ == '__main__':
+    bot_instance = CyberPYG(prefix='.')
+    bot_token: str = retrieve_secret_data("TOKEN")
+
+    bot_instance.run(bot_token)
