@@ -23,12 +23,13 @@ class CyberPYG(commands.Bot):
     async def on_voice_state_update(self, member: Union[discord.User, discord.Member], before, after):
         """ Voice User State Update """
 
-        if "Salon de" in after.channel.name:
-            # When an user joins/creates a private channel
-
-            print("F")
-
-
+        if before.channel and after.channel:  # User's connected before and after the update
+            print(1)
+            if before.self_stream != after.self_stream:  # If user's currently streaming
+                print(2)
+                if "Salon de" in after.channel.name:  # If the channel's a private one
+                    print(3)
+                    print(member.status)
 
 
 if __name__ == '__main__':
