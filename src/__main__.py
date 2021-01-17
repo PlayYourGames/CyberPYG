@@ -24,12 +24,10 @@ class CyberPYG(commands.Bot):
         """ Voice User State Update """
 
         if before.channel and after.channel:  # User's connected before and after the update
-            print(1)
             if before.self_stream != after.self_stream:  # If user's currently streaming
-                print(2)
                 if "Salon de" in after.channel.name:  # If the channel's a private one
-                    print(3)
-                    print(member.status)
+                    print(member.status)  # Status is limited.
+                    # :todo: Retrieving from Discord API user's streaming presence
 
 
 if __name__ == '__main__':
