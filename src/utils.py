@@ -4,6 +4,7 @@ import os
 
 def retrieve_secret_data(key: str):
     """ Retrieve data from a key string """
+
     with open('config/env.json', 'r+') as file:
         data = json.load(file)
     return data[key]
@@ -11,6 +12,7 @@ def retrieve_secret_data(key: str):
 
 def load_cogs(_client, subdir: str):
     """ Load subfolder cogs """
+
     for _cog in [file.split(".")[0] for file in os.listdir(f'cogs/{subdir}') if file.endswith('.py')]:
         subdir = subdir.replace('/', '.')
         try:
@@ -21,6 +23,7 @@ def load_cogs(_client, subdir: str):
 
 async def safe_delete(ctx):
     """ Deleting user command message bypassing permission error """
+
     try:
         await ctx.message.delete()
     except Exception as _:
