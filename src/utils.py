@@ -17,3 +17,11 @@ def load_cogs(_client, subdir: str):
             _client.load_extension(f'cogs.{subdir}.{_cog}') if _cog != '__init__' else ...
         except Exception as e:
             print(e)
+
+
+async def safe_delete(ctx):
+    """ Deleting user command message bypassing permission error """
+    try:
+        await ctx.message.delete()
+    except Exception as _:
+        pass
