@@ -17,6 +17,7 @@ class CyberPYG(commands.Bot):
     async def on_ready(self):
         """ Bot's ready """
 
+        load_cogs(self, subdir='stats')
         print(f"Connecté en tant que {self.user}")
 
     @commands.Cog.listener()
