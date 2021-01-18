@@ -20,6 +20,7 @@ class CyberPYG(commands.Bot):
         load_cogs(self, subdir='stats')
         print(f"Connecté en tant que {self.user}")
 
+    # To refractor
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: Union[discord.User, discord.Member], before, after):
         """ Voice User State Update """
