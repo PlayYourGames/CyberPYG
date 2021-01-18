@@ -4,7 +4,7 @@ import discord
 from attr import dataclass
 from discord.ext import commands
 
-from src.utils import safe_delete
+from src.utils import safe_delete, retrieve_secret_data
 
 
 @dataclass
@@ -19,8 +19,12 @@ class StatisticsPresence(commands.Cog):
         self.bot = bot
         self.activity_channels: dict = {}
         self.users_activity: dict = {}
+        self.allowed_channels: list = []
 
-    @commands.command(name='activty')
+        secret_channels_id = retrieve_secret_data("ACTIVITY_STATS")["CHANNELS"]
+        [self.allowed_channels.append(channel_id) for channel_id in secret_channels_id]
+
+    @commands.command(name='activity')
     async def activity(self, ctx):
         await safe_delete(ctx)
         for user in self.users_activity:
@@ -31,8 +35,9 @@ class StatisticsPresence(commands.Cog):
         """ When a message is found by the API """
 
         if not message.author.bot:  # If the message's not comming from a bot
-            self.increment_user_amount(message.author)
-            print(f"{self.users_activity}")
+            if message.channel.id in self.allowed_channels:
+                self.increment_user_amount(message.author)
+                print(f"{self.users_activity}")
 
     def increment_user_amount(self, target: Union[discord.Member, discord.User]):
         """ User message amount handler"""
