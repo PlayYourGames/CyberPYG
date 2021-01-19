@@ -10,7 +10,7 @@ def retrieve_secret_data(key: str):
     return data[key]
 
 
-def load_cogs(_client, subdir: str):
+def load_cogs(_client, subdir: str) -> None:
     """ Load subfolder cogs """
 
     for _cog in [file.split(".")[0] for file in os.listdir(f'cogs/{subdir}') if file.endswith('.py')]:
@@ -21,7 +21,7 @@ def load_cogs(_client, subdir: str):
             print(e)
 
 
-async def safe_delete(ctx):
+async def safe_delete(ctx) -> None:
     """ Deleting user command message bypassing permission error """
 
     try:
