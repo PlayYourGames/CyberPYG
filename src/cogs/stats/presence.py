@@ -42,7 +42,7 @@ class StatisticsPresence(commands.Cog):
     def increment_user_amount(self, target: Union[discord.Member, discord.User]):
         """ User message amount handler"""
 
-        if target not in self.users_activity:
+        if target not in self.users_activity:  # Just null check the dictionnary with the target as key | Create one if not exists
             self.users_activity[target] = 1
         else:
             self.users_activity[target] += 1
