@@ -1,6 +1,24 @@
 import json
 import os
 
+import discord
+
+
+class ChannelType:
+    channelVoice = None
+    streamerId = -1
+    streamingChannels = {}
+    channelText = None
+    game = None
+    editTimes = 0
+    def __init__(self, channelVoice:discord.VoiceChannel, channelText:discord.TextChannel):
+        self.channelVoice = channelVoice
+        self.channelText = channelText
+        #ChannelType.streamingChannels[channelId] = self
+
+async def send_dm(ctx, member: discord.Member, *, content):
+    channel = await member.create_dm()
+    await channel.send(content)
 
 def retrieve_secret_data(key: str):
     """ Retrieve data from a key string """
