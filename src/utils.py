@@ -54,4 +54,24 @@ async def safe_delete(ctx) -> None:
 def load_faq() -> list:
     with open('config/faq.json', 'r+', encoding='utf-8-sig') as file:
         data = json.load(file)
-    return data
+    return data["data"]
+
+
+def write_data_to_faq(q, a, r):
+    print(f"{q} {type(q)}\n")
+    print(f"{a} {type(a)}\n")
+    print(f"{r} {type(r)}\n")
+
+    data_buff = {
+        "question": q,
+        "answer": a,
+        "reaction": r
+    }
+
+    with open('config/faq.json', 'r+', encoding='utf-8-sig') as file:
+        data = json.load(file)
+        data["data"].append(data_buff)
+        file.seek(0)
+        json.dump(data, file)
+        file.truncate()
+

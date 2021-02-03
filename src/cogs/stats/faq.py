@@ -1,6 +1,7 @@
 from discord import Embed
 from discord.ext import commands
-from utils import safe_delete, load_faq
+from utils import safe_delete, load_faq, write_data_to_faq
+import unicodedata
 
 import pprint
 
@@ -18,10 +19,31 @@ class FAQ(commands.Cog):
             description="Et si vous portiez un peu d'attention aux questions les plus posées sur P-Y-G ?\n",
             color=0x2F3136)
 
-        for iterator in range(len(data)):
-            blank_embed.add_field(name=f"**{data[str(iterator)]['question']}**", value=data[str(iterator)]['answer'], inline=False)
+        for iterator in data:
+            blank_embed.add_field(name=f"**{iterator['question']}** + {iterator['reaction']}",
+                                  value=iterator['answer'], inline=False)
 
-        await ctx.send(embed=blank_embed)
+        bot_message = await ctx.send(embed=blank_embed)
+
+        for iterator in data:
+            await bot_message.add_reaction(iterator['reaction'])
+
+    @commands.command(name='add_faq')
+    async def add_faq(self, ctx):
+        author = ctx.author
+        await safe_delete(ctx)
+
+        await ctx.send("Quelle question souhaitez-vous ajouter ?")
+        question = await self.bot.wait_for('message', check=lambda msg: msg.author == author)
+
+        await ctx.send("Quelle est la réponse de cette question ?")
+        answer = await self.bot.wait_for('message', check=lambda msg: msg.author == author)
+
+        await ctx.send("Et enfin, quelle réaction pour ce beau couple ? (Ajouter un emoji en réaction de ce message)")
+        reaction, user = await self.bot.wait_for('reaction_add', check=lambda reac, user: user == author)
+
+        write_data_to_faq(question.content, answer.content, str(reaction.emoji))
+        await ctx.send("Merci ! Tout a été ajouté !")
 
 
 def setup(bot):

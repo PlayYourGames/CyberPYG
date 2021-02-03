@@ -9,7 +9,7 @@ class CyberPYG(commands.Bot):
         """ Bot's constructor """
 
         super().__init__(command_prefix=prefix, intents=discord.Intents().all())
-        self.bot_instance = self.user
+        self.bot_instance = self
 
     @commands.Cog.listener()
     async def on_ready(self):
