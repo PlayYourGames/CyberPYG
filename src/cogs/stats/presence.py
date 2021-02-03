@@ -4,7 +4,7 @@ import discord
 from attr import dataclass
 from discord.ext import commands
 
-from src.utils import safe_delete, retrieve_secret_data
+from utils import safe_delete, retrieve_secret_data
 
 
 @dataclass

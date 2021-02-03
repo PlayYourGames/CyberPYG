@@ -2,7 +2,7 @@ from typing import Union
 
 import discord
 from discord.ext import commands
-from src.utils import ChannelType
+from utils import ChannelType
 
 def getChannelName(member, game):
     return f"{game.name} - {member.name}"

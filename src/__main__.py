@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from src.utils import *
+from utils import *
 
 
 class CyberPYG(commands.Bot):
@@ -17,6 +17,7 @@ class CyberPYG(commands.Bot):
 
         load_cogs(self, subdir='stats')
         print(f"Connecté en tant que {self.user}")
+
 
 if __name__ == '__main__':
     bot_instance = CyberPYG(prefix='.')
