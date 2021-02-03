@@ -74,4 +74,3 @@ def write_data_to_faq(q, a, r):
         file.seek(0)
         json.dump(data, file)
         file.truncate()
-

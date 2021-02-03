@@ -45,6 +45,11 @@ class FAQ(commands.Cog):
         write_data_to_faq(question.content, answer.content, str(reaction.emoji))
         await ctx.send("Merci ! Tout a été ajouté !")
 
+    @commands.Cog.listener()
+    async def on_raw_reaction_add(self, payload):
+        if payload.message_id is not None:
+            pass  # todo: Mettre quelque chose pour vérifier que le message où on ajoute la réaction est bien celui du FAQ
+
 
 def setup(bot):
     bot.add_cog(FAQ(bot))
