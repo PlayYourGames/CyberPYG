@@ -15,8 +15,7 @@ async def onMemberJoinChannel(member, before, after):
             ChannelType.streamingChannels.pop(channel.id)
             await channel.delete()
             await text_channel.delete()
-
-    if after.channel is not None and "Streaming" in after.channel.name: # Joining streaming channel
+    if after.channel is not None and after.channel.id == 803010539373723689: # Joining streaming channel
         game = getMemberGame(member)
         guild = member.guild
         new_voice_channel = None
@@ -62,7 +61,6 @@ async def onSelfStreamStart(member, channel): # Triggered when self stream start
                 ChannelType.streamingChannels[channel.id].editTimes = ChannelType.streamingChannels[channel.id].editTimes + 1
             print(f"[STREAM] Streaming {game.name} from {member.display_name}")
             await default_channel.send(f'{member.mention} a débuté son stream sur **{game.name}**')
-
 
 async def onSelfStreamEnd(member, channel:discord.VoiceChannel): # Triggered when self stream ending
     pass
