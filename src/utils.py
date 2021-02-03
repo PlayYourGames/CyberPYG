@@ -52,6 +52,6 @@ async def safe_delete(ctx) -> None:
 
 
 def load_faq() -> list:
-    with open('config/faq.json', 'r+') as file:
+    with open('config/faq.json', 'r+', encoding='utf-8-sig') as file:
         data = json.load(file)
     return data

@@ -15,7 +15,7 @@ class FAQ(commands.Cog):
         data: list = load_faq()
 
         blank_embed = Embed(
-            description="Et si vous portiez un peu d'attention aux questions les plus posées sur P-Y-G ?",
+            description="Et si vous portiez un peu d'attention aux questions les plus posées sur P-Y-G ?\n",
             color=0x2F3136)
 
         for iterator in range(len(data)):
