@@ -1,5 +1,12 @@
 {
+  "0": {
+    "question": "Comment accéder aux salons de #publicité ?",
+    "answer": "Vous devez lire et accepter le #règlement-publicitaire . Après cela, vous recevrez le rôle @promoteur qui vous permettra de faire votre publicité dans #serveur-discord, #chaîne-youtube et #chaîne-twitch, dans le respect des règles. Le salon #✨publicité-premium est réservé aux boosters et donateurs.",
+    "reaction": ":LogoPYG:"
+  },
   "1": {
-    "fdf": "dfgdfg"
+    "question": "Comment convertir des pyglards ?\n",
+    "answer": "Tout d'abord, vous devrez atteindre le niveau 20 pour obtenir le rôle @nourrains. Ensuite, consultez la #boutique-pyg pour choisir votre offre et vous référer aux tarifs. Une fois choisi, rendez vous dans le salon #contact pour ouvrir un ticket et dialoguer avec l'équipe, et montrez votre argent avec la commande /bank. Vous recevrez (si la transaction est acceptée) votre bon en mp, et vos pyglards seront retirés.",
+    "reaction": ":LogoPYG:"
   }
 }
