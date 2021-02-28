@@ -1,18 +1,18 @@
 ﻿{
     "data": [
         {
-            "question": "foo",
-            "answer": "bar",
+            "question": "comment on voit notre nombre de saphir?",
+            "answer": "Tu vas dans #:robot:commandes-androïdes et tu écris `,money`",
             "reaction": "\ud83e\udd21"
         },
         {
-            "question": "tech",
-            "answer": "nique",
+            "question": "Comment obtenir des saphirs?",
+            "answer": "Ça s'obtient en envoyant des messages. Tu peux gagner entre 5 et 15 saphirs par messages.",
             "reaction": "\ud83d\udc9b"
         },
         {
-            "question": "f",
-            "answer": "g",
+            "question": "le salon #📞candidatures  est accessible à partir de quel niveau?",
+            "answer": "À partir du niveau 10",
             "reaction": "\ud83e\udd0f"
         }
     ]
