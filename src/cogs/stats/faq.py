@@ -1,6 +1,6 @@
-from discord import Embed
+from discord import Embed, message
 from discord.ext import commands
-from utils import safe_delete, load_faq, write_data_to_faq
+from utils import safe_delete, load_faq, write_data_to_faq, retrieve_secret_data, search_answer_by_react
 import unicodedata
 
 import pprint
@@ -42,13 +42,16 @@ class FAQ(commands.Cog):
         await ctx.send("Et enfin, quelle réaction pour ce beau couple ? (Ajouter un emoji en réaction de ce message)")
         reaction, user = await self.bot.wait_for('reaction_add', check=lambda reac, user: user == author)
 
-        write_data_to_faq(question.content, answer.content, str(reaction.emoji))
+        write_data_to_faq(question.content, answer.content,
+                          str(reaction.emoji))
         await ctx.send("Merci ! Tout a été ajouté !")
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
-        if payload.message_id is not None:
-            pass  # todo: Mettre quelque chose pour vérifier que le message où on ajoute la réaction est bien celui du FAQ
+        if payload.channel_id is not None and payload.channel_id == int(retrieve_secret_data("FAQ_CHANNEL")):
+            member = payload.member
+            await member.send(search_answer_by_react(payload.emoji.name))
+            print(search_answer_by_react(payload.emoji.name))
 
 
 def setup(bot):

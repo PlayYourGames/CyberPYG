@@ -37,7 +37,8 @@ def load_cogs(_client, subdir: str) -> None:
     for _cog in [file.split(".")[0] for file in os.listdir(f'cogs/{subdir}') if file.endswith('.py')]:
         subdir = subdir.replace('/', '.')
         try:
-            _client.load_extension(f'cogs.{subdir}.{_cog}') if _cog != '__init__' else ...
+            _client.load_extension(
+                f'cogs.{subdir}.{_cog}') if _cog != '__init__' else ...
         except Exception as e:
             print(e)
 
@@ -56,6 +57,12 @@ def load_faq() -> list:
         data = json.load(file)
     return data["data"]
 
+
+def search_answer_by_react(react: str) -> str:
+    data = load_faq()
+    for d in data:
+        if d["reaction"] == react:
+            return d["answer"]
 
 def write_data_to_faq(q, a, r):
     print(f"{q} {type(q)}\n")
