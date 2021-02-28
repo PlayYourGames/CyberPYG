@@ -51,7 +51,6 @@ class FAQ(commands.Cog):
         if payload.channel_id is not None and payload.channel_id == int(retrieve_secret_data("FAQ_CHANNEL")):
             member = payload.member
             await member.send(search_answer_by_react(payload.emoji.name))
-            print(search_answer_by_react(payload.emoji.name))
 
 
 def setup(bot):
