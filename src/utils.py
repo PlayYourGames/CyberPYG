@@ -64,6 +64,14 @@ def search_answer_by_react(react: str) -> str:
         if d["reaction"] == react:
             return d["answer"]
 
+
+def search_question_by_react(react: str) -> str:
+    data = load_faq()
+    for d in data:
+        if d["reaction"] == react:
+            return d["question"]
+
+
 def write_data_to_faq(q, a, r):
     print(f"{q} {type(q)}\n")
     print(f"{a} {type(a)}\n")

@@ -1,6 +1,6 @@
 from discord import Embed, message
 from discord.ext import commands
-from utils import safe_delete, load_faq, write_data_to_faq, retrieve_secret_data, search_answer_by_react
+from utils import safe_delete, load_faq, search_question_by_react, write_data_to_faq, retrieve_secret_data, search_answer_by_react
 import unicodedata
 
 import pprint
@@ -50,7 +50,11 @@ class FAQ(commands.Cog):
     async def on_raw_reaction_add(self, payload):
         if payload.channel_id is not None and payload.channel_id == int(retrieve_secret_data("FAQ_CHANNEL")):
             member = payload.member
-            await member.send(search_answer_by_react(payload.emoji.name))
+
+            embed = Embed(title=search_question_by_react(payload.emoji.name),
+                          description=search_answer_by_react(payload.emoji.name), color=0x3ad841)
+
+            await member.send(embed=embed)
 
 
 def setup(bot):
