@@ -44,12 +44,13 @@ async def onMemberJoinChannel(member, before, after):
         channelType = ChannelType.streamingChannels.get(channel.id) if before is not None else None
         if channelType is not None and len(channel.members) <= 0:
             text_channel = ChannelType.streamingChannels[channel.id].channelText
-            await channel.delete()
-            await text_channel.delete()
             try:
+                await channel.delete()
+                await text_channel.delete()
                 del ChannelType.streamingChannels[channel.id]
-            except KeyError:
+            except (KeyError, discord.errors.NotFound):
                 pass
+
     if after.channel is not None and after.channel.id == config["channels"]["voice_channel"]: # Joining streaming channel
         game = getMemberGame(member)
         guild = member.guild
