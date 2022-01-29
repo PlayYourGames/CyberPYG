@@ -1,9 +1,32 @@
 {
-  "channels":
+  "prod":
   {
-    "error_channel": "828601755524005939",
-    "voice_channel": "803010539373723689",
-    "text_channel": "833331054579941396"
+    "channels":
+    {
+      "error_channel": 828601755524005939,
+      "voice_channel": 803010539373723689,
+      "text_channel": 833331054579941396
+    },
+    "bot_token": "NzkxNDAwNjM0NjIzNDU5MzY4.X-OnRg.SBwciY3auUrDV4NhjKAYSoxoLAQ",
+    "igdb":
+    {
+      "client_id": "a9ah58uplrympi382ua8r7lfbp15dr",
+      "client_secret": "dp2aoienaywomgj226ho0gd6skurhm"
+    }
   },
-  "bot_token": "NzkxNDAwNjM0NjIzNDU5MzY4.X-OnRg.SBwciY3auUrDV4NhjKAYSoxoLAQ"
+  "dev":
+  {
+    "channels":
+    {
+      "error_channel": 828601755524005939,
+      "voice_channel": 802937755734376488,
+      "text_channel": 800505820319580170
+    },
+    "bot_token": "NzExMzMwODU0MTk4MDUwOTI3.XsBcew.K2j4r5V0dY9SXG8IRHe2AWswCQA",
+    "igdb":
+    {
+      "client_id": "a9ah58uplrympi382ua8r7lfbp15dr",
+      "client_secret": "dp2aoienaywomgj226ho0gd6skurhm"
+    }
+  }
 }
