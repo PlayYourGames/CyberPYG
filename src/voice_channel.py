@@ -15,7 +15,7 @@ import random
 
 DEV = False
 
-config: dict
+config:dict=None
 
 client = discord.Client(intents=discord.Intents().all())
 
