@@ -106,9 +106,12 @@ async def onMemberJoinChannel(member, before, after):
         guild = member.guild
         new_voice_channel = await guild.create_voice_channel(name=getVoiceChannelName(member, game),
                                                              category=after.channel.category)
+        overwrite:discord.PermissionOverwrite = discord.PermissionOverwrite()
+        overwrite.manage_channels = True
+        await new_voice_channel.set_permissions(member, overwrite=overwrite)
         new_text_channel = await guild.create_text_channel(name=getTextChannelName(member, game),
                                                            category=after.channel.category)
-
+        await new_text_channel.set_permissions(member, overwrite=overwrite)
         ChannelType.streamingChannels[new_voice_channel.id] = ChannelType(new_voice_channel, new_text_channel)
         ChannelType.streamingChannels[new_voice_channel.id].streamerId = member.id
         ChannelType.streamingChannels[new_voice_channel.id].game = game
@@ -129,9 +132,9 @@ async def on_voice_state_update(member: discord.Member, before, after):
 async def onSelfStreamStart(member, channel):  # Triggered when self stream starting
     if channel is not None and channel.id in ChannelType.streamingChannels:
         game = getMemberGame(member)
-        if member.id == ChannelType.streamingChannels[channel.id].streamerId and getMemberGame(member) != None:
+        if getMemberGame(member) != None:
             channel_name = getVoiceChannelName(member, game)
-            if channel.name != channel_name and ChannelType.streamingChannels[channel.id].editTimes < 2:
+            if member.id == ChannelType.streamingChannels[channel.id].streamerId and channel.name != channel_name and ChannelType.streamingChannels[channel.id].editTimes < 2:
                 await channel.edit(name=channel_name)
                 await ChannelType.streamingChannels[channel.id].channelText.edit(name=getTextChannelName(member, game))
                 ChannelType.streamingChannels[channel.id].editTimes = ChannelType.streamingChannels[
@@ -147,8 +150,8 @@ async def sendAnnounce(member, game, channel):
     embed = discord.Embed(title=f"🔊・{game.name} - {member.display_name}", url=invitation.url,
                           description=f"**{member.mention}** vient de lancer un stream sur **{game.name}**. N'hésitez pas à le rejoindre !",
                           color=0x25e000)
-    response = requestIGDB("POST", "games", f"search \"{game.name}\"; fields screenshots;")
-    if response is not None:
+    response = requestIGDB("POST", "games", f"fields *; where name=\"{game.name}\";")
+    if response is not None and "screenshots" in response:
         screenshot = random.choice(response["screenshots"])  # Takes randomly a screenshot from the retrieved list
         response = requestIGDB("POST", "screenshots", f"fields url; where id={screenshot};")
         url: str = response["url"]
