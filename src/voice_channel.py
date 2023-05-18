@@ -4,7 +4,6 @@ from datetime import datetime
 
 import discord
 import traceback
-import discord_components
 import requests
 
 from typing import Union, Dict, Any
@@ -160,9 +159,10 @@ async def sendAnnounce(member, game, channel):
         embed.set_thumbnail(url=url)
     embed.set_footer(text=datetime.now().strftime("%d/%m/%Y, %H:%M:%S"))
     default_channel = member.guild.get_channel(config["channels"]["text_channel"])
-    await default_channel.send(embed=embed, components=[
-        discord_components.Button(style=discord_components.ButtonStyle.URL, label="🔉・Rejoindre le vocal",
-                                  url=invitation.url)])
+    view = discord.ui.View()
+    button = discord.ui.Button(label='🔉・Rejoindre le vocal', style=discord.ButtonStyle.success, url=invitation.url)
+    view.add_item(item=button)
+    await default_channel.send(embed=embed, view=view)
 
 
 async def onSelfStreamEnd(member, channel: discord.VoiceChannel):  # Triggered when self stream ending
